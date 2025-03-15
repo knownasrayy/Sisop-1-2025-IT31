@@ -119,7 +119,7 @@ Pada soal ini, kita diminta membuat sistem pencatatan Player aktif agar terpisah
 ## Soal_3
 Untuk merayakan ulang tahun ke 52 album The Dark Side of the Moon, tim PR Pink Floyd mengadakan sebuah lomba dimana peserta diminta untuk membuat sebuah script bertemakan setidaknya 5 dari 10 lagu dalam album tersebut. Sebagai salah satu peserta, kamu memutuskan untuk memilih Speak to Me, On the Run, Time, Money, dan Brain Damage. Saat program ini dijalankan, terminal harus dibersihkan terlebih dahulu agar tidak mengganggu tampilan dari fungsi fungsi yang kamu buat. Program ini dijalankan dengan cara `./dsotm.sh --play=”<Track>”` dengan Track sebagai nama nama lagu yang kamu pilih.
 
-### A. Speak to Me
+#### A. Speak to Me
 ```bash
 "Speak to Me")
             curl -s https://raw.githubusercontent.com/annthurium/affirmations/refs/heads/main/affirmations.js | 
@@ -149,6 +149,14 @@ Untuk merayakan ulang tahun ke 52 album The Dark Side of the Moon, tim PR Pink F
             echo -e "\nDone!"
             ;;
 ```
+- `echo -ne "Ready, set, go! "` berfungsi untuk menampilkan teks tanpa baru
+- `progress=0` berfungsi untuk memulai progress dari 0%
+- `while [ $progress -lt 100 ]; do` berfungsi untuk membuat loop berjalan selama belum 100%
+- `progress=$((progress + RANDOM % 10))` berfungsi untuk menambahkan nilai acak antara 0 hingga 9
+- `[ $progress -gt 100 ] && progress=100 ` berfungsi untuk memaksa progress menjadi 100 jika angka melebihi 100
+- `$(printf '#%.0s' $(seq 1 $((progress / 2))))` berfungsi untuk membuat # sebanyak `(progress / 2)`
+- `$(printf ' %.0s' $(seq 1 $((50 - progress / 2))))` berfungsi untuk mengisi sisa tempat dengan spasi
+- `sleep $(awk -v min=0.1 -v max=1 'BEGIN{srand(); print min+rand()*(max-min)}')` berfungsi untukk menghasilkan angka acak antara 0.1 hingga 1 detik
 
 
 ### C. Time
