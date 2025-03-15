@@ -88,6 +88,12 @@ print "Data tidak ditemukan.";
 }
 }' reading_data.csv
 ```
+- `$9 ~ /Asia/ && $5` berfungsi untuk hanya mencari yang mengandung "Asia" dan mencari tanggal setelah "2023-12-31"
+- `genre[$4]++` berfungsi untuk menghitung berapa kali genre itu muncul
+- `for (g in genre)` loop untuk memeriksa genre yang sudah dihitung
+- `if (genre[g] > max_count)` berfungsi untuk memeriksa apakah genre lebih besar dari `max_count`, jika iya, nilai `max_count` dan `popular_genre` akan diubah
+
+
 
 
 
