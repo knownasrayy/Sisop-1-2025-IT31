@@ -93,35 +93,13 @@ print "Data tidak ditemukan.";
 - `for (g in genre)` loop untuk memeriksa genre yang sudah dihitung
 - `if (genre[g] > max_count)` berfungsi untuk memeriksa apakah genre lebih besar dari `max_count`, jika iya, nilai `max_count` dan `popular_genre` akan diubah
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+### Output
+```
+Chris Hemsworth membaca 56 buku.
+Rata-rata durasi membaca dengan Tablet adalah 152.381 menit
+Pembaca dengan rating tertinggi: Robert Downey Jr. - Deep Space Mysteries - 6.0
+Genre paling populer di Asia setelah 2023 adalah Mystery dengan 14 buku.
+```
 
 
 
