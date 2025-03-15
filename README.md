@@ -14,20 +14,20 @@ kemudian kita diminta untuk:
 4. Menganalisis data untuk menemukan genre yang paling sering dibaca di Asia setelah 31 Desember 2023, beserta jumlahnya.
 
 ### Membuat file bernama poppo_siroyo.sh
-```
+```bash
 nano poppo_siroyo.sh
 ```
 - `nano` adalah teks editor berbasis terminal yang banyak digunakan di Linux
 
 ### Download file csv yang diberikan menggunakan wget
-```
+```bash
 wget "https://drive.usercontent.google.com/u/0/uc?id=1l8fsj5LZLwXBlHaqhfJVjz_T0p7EJjqV&export=download" -O reading_data.csv
 ```
 - `wget` untuk mengunduh file
 - `-O` untuk menentukan nama file
   
 ### A. Menghitung jumlah buku yang dibaca oleh Chris Hemsworth
-```
+```bash
 awk '/Chris Hemsworth/ {++n}
 END{
 if(n>0){
@@ -42,7 +42,7 @@ Menggunakan `awk` untuk membaca file reading_data.csv
 - `'/Chris Hemsworth/ {++n}` setiap kali ada "Chris Hemsworth" maka `n` akan bertambah 1
 
 ### B. Menghitung rata-rata durasi membaca untuk buku-buku yang dibaca menggunakan Tablet
-```
+```bash
 awk -F, '$8 == "Tablet" { total += $6; count++ }
 END {
 if (count > 0) {
@@ -57,7 +57,7 @@ print "Data membaca dengan tablet tidak ditemukan."
 - `total/count` berfungsi untuk menghitung rata-rata durasi membaca buku yang dibaca menggunakan tablet
 
 ### C. Mencari siapa yang memberikan rating tertinggi untuk buku yang dibaca beserta nama dan judul bukunya.
-```
+```bash
 awk -F, 'NR > 1 && $7 > max { max = $7; name = $2; book = $3 }
 END {
 if (max > 0){
@@ -72,7 +72,7 @@ Print "Data rating tidak ditemukan."
 - `{ max = $7; name = $2; book = $3 }` jika nilai `$7` lebih besar dari `max` maka nilai `max` akan diganti menjadi nilai `$7`, setelah mendapat nilai rating tertinggi maka `%2` akan tersimpan di dalam `name` dan `$3` tersimpan dalam `book` yang sesuai dengan baris dimana nilai rating tertinggi berada
 
 ### D. Menganalisis data untuk menemukan genre yang paling sering dibaca di Asia setelah 31 Desember 2023, beserta jumlahnya
-```
+```bash
 awk -F, '$9 ~ /Asia/ && $5 > "2023-12-31" {genre[$4]++}
 END {
 max_count = 0; for (g in genre) {
