@@ -41,8 +41,35 @@ print "Data membaca dengan tablet tidak ditemukan."
 }
 }' reading_data.csv
 ```
-
-
+**C. Mencari siapa yang memberikan rating tertinggi untuk buku yang dibaca beserta nama dan judul bukunya.**
+```
+awk -F, 'NR > 1 && $7 > max { max = $7; name = $2; book = $3 }
+END {
+if (max > 0){
+print "Pembaca dengan rating tertinggi:", name, "-", book, "-", max
+}
+else {
+Print "Data rating tidak ditemukan."
+}
+}' reading_data.csv
+```
+**D. Menganalisis data untuk menemukan genre yang paling sering dibaca di Asia setelah 31 Desember 2023, beserta jumlahnya**
+```
+awk -F, '$9 ~ /Asia/ && $5 > "2023-12-31" {genre[$4]++}
+END {
+max_count = 0; for (g in genre) {
+if (genre[g] > max_count) {
+max_count = genre[g]; popular_genre = g;
+}
+}
+if (max_count > 0) {
+print "Genre paling populer di Asia setelah 2023 adalah", popular_genre, "dengan", max_count, "buku.";
+}
+else {
+print "Data tidak ditemukan.";
+}
+}' reading_data.csv
+```
 
 
 
