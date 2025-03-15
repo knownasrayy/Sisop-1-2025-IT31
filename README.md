@@ -127,6 +127,27 @@ Untuk merayakan ulang tahun ke 52 album The Dark Side of the Moon, tim PR Pink F
                 sleep 1
             done
 ```
+- `curl -s` berfungsi untuk mengunduh file dan membuat output tidak menampilkan informasi tambahan
+- `sed '1d;$d'` berfungsi untuk menghapus baris pertama dari file dan menghapus baris terakhir dari file
+- `'s/^[[:space:]]*"//` berfungsi untuk menghapus spasi awal dan tanda kutip
+- `s/",?$//;' ` berfungsi untuk menghapus tanda kutip di akhir baris dan juga koma
+- `grep -v '^\];$'` berfungsi untuk menampilkan semua baris kecuali yang ada `];`
+- `while IFS= read -r line` berfungsi untuk membaca setiap line
+
+### B. On The Run
+```
+ "On the Run")
+            echo -ne "Ready, set, go! "
+            progress=0
+            while [ $progress -lt 100 ]; do
+                progress=$((progress + RANDOM % 10))
+                [ $progress -gt 100 ] && progress=100
+                echo -ne "\rReady, set, go! [$(printf '#%.0s' $(seq 1 $((progress / 2))))$(printf ' %.0s' $(seq 1 $((50 - progress / 2))))] $progress%"
+                sleep $(awk -v min=0.1 -v max=1 'BEGIN{srand(); print min+rand()*(max-min)}')
+            done
+            echo -e "\nDone!"
+            ;;
+```
 
 
 
