@@ -136,6 +136,86 @@ Untuk merayakan ulang tahun ke 52 album The Dark Side of the Moon, tim PR Pink F
 
 
 
+### C. Money
+Menampilkan efek *matrix rain* berisi simbol mata uang.
+
+**Perintah:**
+```bash
+./dsotm.sh --play="Money"
+```
+**Output (simulasi terminal):**
+```
+$ € ¥ £ ฿ ₣
+€ ¥ £ ฿ ₣ $
+¥ £ ฿ ₣ $ €
+```
+**Kode yang Digunakan:**
+```bash
+symbols=( "$" "€" "£" "¥" "₫" "₹" "฿" "₣" )
+cols=$(tput cols)
+rows=$(tput lines)
+declare -a rain
+for ((i=0; i<$cols; i++)); do
+    rain[$i]=$(( RANDOM % rows ))
+done
+while true; do
+    clear
+    for ((row=0; row<$rows; row++)); do
+        for ((col=0; col<$cols; col++)); do
+            if [[ ${rain[$col]} -eq $row ]]; then
+                printf "\e[31m%s\e[0m" "${symbols[RANDOM % ${#symbols[@]}]}"
+            else
+                printf " "
+            fi
+        done
+        echo ""
+    done
+    for ((i=0; i<$cols; i++)); do
+        ((rain[$i]++))
+        if (( rain[$i] > rows )); then
+            rain[$i]=0
+        fi
+    done
+    sleep 0.2
+done
+```
+
+
+
+### D. Brain Damage
+Menampilkan *task manager* seperti `top` yang diperbarui setiap detik.
+
+**Perintah:**
+```bash
+./dsotm.sh --play="Brain Damage"
+```
+**Output (diperbarui setiap detik):**
+```
+Brain Damage Task Manager - 12:34:56
+PID   USER      %CPU %MEM   VSZ   RSS COMMAND
+1234  user      12.3  4.5  123456  65432 firefox
+5678  root      8.9   2.1  98765   54321 chrome
+```
+**Kode yang Digunakan:**
+```bash
+while true; do
+    clear
+    echo -e "\e[1;33mBrain Damage Task Manager - $(date '+%H:%M:%S')\e[0m"
+    echo -e "\e[1;34mPID   USER      %CPU %MEM   VSZ   RSS COMMAND\e[0m"
+    ps -eo pid,user,%cpu,%mem,vsz,rss,comm --sort=-%cpu | head -n 10
+    sleep 1
+done
+```
+
+
+
+
+
+
+
+
+
+
 
 
 
