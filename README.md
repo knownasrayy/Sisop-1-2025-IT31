@@ -104,7 +104,9 @@ Genre paling populer di Asia setelah 2023 adalah Mystery dengan 14 buku.
 
 
 ## Soal_2
-
+Pada soal ini, kita diminta membuat sistem pencatatan Player aktif agar terpisah dari Observer, dengan shell script:
+1.register.sh → Mendaftarkan Player baru menggunakan email, username, dan password, lalu menyimpannya di /data/player.csv.
+![Screenshot 2025-03-15 235839](https://github.com/user-attachments/assets/4cc20517-3187-44df-b7b0-c234a9ff2493)
 
 
 
