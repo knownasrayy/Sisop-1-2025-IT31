@@ -32,6 +32,7 @@ print "Chris Hemsworth tidak ditemukan."
 }
 }' reading_data.csv
 ```
+Menggunakan `awk` untuk membaca file reading_data.csv
 **B. Menghitung rata-rata durasi membaca untuk buku-buku yang dibaca menggunakan Tablet**
 ```
 awk -F, '$8 == "Tablet" { total += $6; count++ }
