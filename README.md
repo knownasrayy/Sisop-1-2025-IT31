@@ -136,6 +136,7 @@ Untuk merayakan ulang tahun ke 52 album The Dark Side of the Moon, tim PR Pink F
 
 
 ## Soal_4
+
 # Pokemon Analysis Tool
 
 ## Deskripsi
@@ -169,93 +170,18 @@ Jalankan skrip dengan perintah:
 ### 3. Contoh Penggunaan
 
 #### a) Menampilkan Informasi Pokémon dengan Penggunaan Tertinggi
+**Perintah:**
 ```bash
 ./pokemon_analysis.sh pokemon_usage.csv --info
 ```
-_Output:_
+**Output:**
 ```
 Summary of pokemon_usage.csv
 Highest Adjusted Usage:  Pikachu with 25.67%
 Highest Raw Usage:       Charizard with 1200 uses
 ```
-
-#### b) Mengurutkan Pokémon Berdasarkan Penggunaan
+**Kode yang Digunakan:**
 ```bash
-./pokemon_analysis.sh pokemon_usage.csv --sort usage
-```
-_Output:_
-```
-Nama,Usage,RawUsage,Type1,Type2,HP,ATK,DEF,SPATK,SPDEF,Speed
-Charizard,25.67,1200,Fire,Flying,78,84,78,109,85,100
-Pikachu,20.50,950,Electric,,35,55,40,50,50,90
-```
-
-#### c) Mencari Pokémon Berdasarkan Nama
-```bash
-./pokemon_analysis.sh pokemon_usage.csv --grep pikachu
-```
-_Output:_
-```
-Nama,Usage,RawUsage,Type1,Type2,HP,ATK,DEF,SPATK,SPDEF,Speed
-Pikachu,20.50,950,Electric,,35,55,40,50,50,90
-```
-
-#### d) Menampilkan Pokémon Berdasarkan Tipe
-```bash
-./pokemon_analysis.sh pokemon_usage.csv --filter fire
-```
-_Output:_
-```
-Nama,Usage,RawUsage,Type1,Type2,HP,ATK,DEF,SPATK,SPDEF,Speed
-Charizard,25.67,1200,Fire,Flying,78,84,78,109,85,100
-Blaziken,18.90,800,Fire,Fighting,80,120,70,110,70,80
-```
-
-#### e) Menampilkan Halaman Bantuan
-```bash
-./pokemon_analysis.sh -h
-```
-_Output:_
-```
-POKEMON ANALYSIS TOOL
-============================================================
-Usage: ./pokemon_analysis.sh <file.csv> <command> [options]
-Commands:
-  --info                : Menampilkan statistik Pokémon dengan penggunaan tertinggi.
-  --sort <column>       : Mengurutkan Pokémon berdasarkan kolom tertentu.
-  --grep <name>         : Mencari Pokémon berdasarkan nama.
-  --filter <type>       : Menampilkan semua Pokémon berdasarkan Type1 atau Type2.
-  -h, --help            : Menampilkan halaman bantuan ini.
-============================================================
-```
-
-## Struktur Kode
-Berikut adalah skrip utama `pokemon_analysis.sh`:
-```bash
-#!/bin/bash
-
-# Mengambil file pokemon_usage.csv jika tidak ada
-URL_FILE="https://drive.usercontent.google.com/download?id=1n-2n_ZOTMleqa8qZ2nB8ALAbGFyN4-LJ&export=download&authuser=0"
-FILE="pokemon_usage.csv"
-
-function show_help() {
-    cat << "EOF"
-POKEMON ANALYSIS TOOL
-Usage: ./pokemon_analysis.sh <file.csv> <command> [options]
-...
-EOF
-    exit 0
-}
-
-if [[ "$1" == "-h" || "$1" == "--help" ]]; then
-    show_help
-fi
-
-if [[ $# -lt 2 ]]; then
-    echo "Error: Perintah tidak lengkap!"
-    exit 1
-fi
-
 if [[ "$2" == "--info" ]]; then
     HIGHEST_USAGE=$(awk -F',' 'NR > 1 {if ($2+0 > max) {max=$2; name=$1}} END {printf "%s with %.5f%%\n", name, max}' "$1")
     HIGHEST_RAW_USAGE=$(awk -F',' 'NR > 1 {if ($3+0 > max) {max=$3; name=$1}} END {printf "%s with %d uses\n", name, max}' "$1")
@@ -264,7 +190,21 @@ if [[ "$2" == "--info" ]]; then
     echo "Highest Raw Usage:       $HIGHEST_RAW_USAGE"
     exit 0
 fi
+```
 
+#### b) Mengurutkan Pokémon Berdasarkan Penggunaan
+**Perintah:**
+```bash
+./pokemon_analysis.sh pokemon_usage.csv --sort usage
+```
+**Output:**
+```
+Nama,Usage,RawUsage,Type1,Type2,HP,ATK,DEF,SPATK,SPDEF,Speed
+Charizard,25.67,1200,Fire,Flying,78,84,78,109,85,100
+Pikachu,20.50,950,Electric,,35,55,40,50,50,90
+```
+**Kode yang Digunakan:**
+```bash
 if [[ "$2" == "--sort" ]]; then
     COLUMN=$3
     case $COLUMN in
@@ -283,13 +223,40 @@ if [[ "$2" == "--sort" ]]; then
     tail -n +2 "$1" | sort -t ',' -k"$SORT_FIELD" -nr
     exit 0
 fi
+```
 
+#### c) Mencari Pokémon Berdasarkan Nama
+**Perintah:**
+```bash
+./pokemon_analysis.sh pokemon_usage.csv --grep pikachu
+```
+**Output:**
+```
+Nama,Usage,RawUsage,Type1,Type2,HP,ATK,DEF,SPATK,SPDEF,Speed
+Pikachu,20.50,950,Electric,,35,55,40,50,50,90
+```
+**Kode yang Digunakan:**
+```bash
 if [[ "$2" == "--grep" ]]; then
     echo "$(head -n 1 "$1")"
     awk -F',' -v name="$3" 'NR == 1 || tolower($1) ~ tolower(name)' "$1" | sort -t ',' -k2,2nr
     exit 0
 fi
+```
 
+#### d) Menampilkan Pokémon Berdasarkan Tipe
+**Perintah:**
+```bash
+./pokemon_analysis.sh pokemon_usage.csv --filter fire
+```
+**Output:**
+```
+Nama,Usage,RawUsage,Type1,Type2,HP,ATK,DEF,SPATK,SPDEF,Speed
+Charizard,25.67,1200,Fire,Flying,78,84,78,109,85,100
+Blaziken,18.90,800,Fire,Fighting,80,120,70,110,70,80
+```
+**Kode yang Digunakan:**
+```bash
 if [[ "$2" == "--filter" ]]; then
     if [[ -z "$3" ]]; then
         echo "Error: no filter option provided"
@@ -299,13 +266,23 @@ if [[ "$2" == "--filter" ]]; then
     awk -F',' -v type="$3" 'NR == 1 || tolower($4) == tolower(type) || tolower($5) == tolower(type)' "$1" | sort -t ',' -k2,2nr
     exit 0
 fi
-
-echo "Error: Invalid command '$2'!"
-exit 1
 ```
 
-## Lisensi
-Proyek ini berada di bawah lisensi MIT.
-
-
-  
+#### e) Menampilkan Halaman Bantuan
+**Perintah:**
+```bash
+./pokemon_analysis.sh -h
+```
+**Output:**
+```
+POKEMON ANALYSIS TOOL
+============================================================
+Usage: ./pokemon_analysis.sh <file.csv> <command> [options]
+Commands:
+  --info                : Menampilkan statistik Pokémon dengan penggunaan tertinggi.
+  --sort <column>       : Mengurutkan Pokémon berdasarkan kolom tertentu.
+  --grep <name>         : Mencari Pokémon berdasarkan nama.
+  --filter <type>       : Menampilkan semua Pokémon berdasarkan Type1 atau Type2.
+  -h, --help            : Menampilkan halaman bantuan ini.
+============================================================
+```
