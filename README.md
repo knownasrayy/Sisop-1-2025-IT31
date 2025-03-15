@@ -68,6 +68,9 @@ Print "Data rating tidak ditemukan."
 }
 }' reading_data.csv
 ```
+- `$7 > max` command ini berfungsi untuk mengecek rating terbesar di kolom 7
+- `{ max = $7; name = $2; book = $3 }` jika nilai `$7` lebih besar dari `max` maka nilai `max` akan diganti menjadi nilai `$7`, setelah mendapat nilai rating tertinggi maka `name` dan `book` akan tersimpan sesuai dengan baris dimana nilai rating tertinggi berada
+
 ### D. Menganalisis data untuk menemukan genre yang paling sering dibaca di Asia setelah 31 Desember 2023, beserta jumlahnya
 ```
 awk -F, '$9 ~ /Asia/ && $5 > "2023-12-31" {genre[$4]++}
