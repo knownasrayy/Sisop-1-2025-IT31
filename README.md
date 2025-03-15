@@ -53,6 +53,9 @@ print "Data membaca dengan tablet tidak ditemukan."
 }
 }' reading_data.csv
 ```
+- `'$8 == "Tablet" { total += $6; count++ }` digunakan untuk memeriksa apakah di kolom 8 ada "Tablet", jika ada maka angka yang ada pada kolom 6 akan ditambahkan ke `total` lalu `count` akan bertambah
+- `total/count` berfungsi untuk menghitung rata-rata durasi membaca buku yang dibaca menggunakan tablet
+
 ### C. Mencari siapa yang memberikan rating tertinggi untuk buku yang dibaca beserta nama dan judul bukunya.
 ```
 awk -F, 'NR > 1 && $7 > max { max = $7; name = $2; book = $3 }
