@@ -17,7 +17,7 @@ kemudian kita diminta untuk:
 ```
 nano poppo_siroyo.sh
 ```
-`nano` adalah teks editor berbasis terminal yang banyak digunakan di Linux
+- `nano` adalah teks editor berbasis terminal yang banyak digunakan di Linux
 
 ### Download file csv yang diberikan menggunakan wget
 ```
