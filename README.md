@@ -14,9 +14,9 @@ kemudian kita diminta untuk:
 4. Menganalisis data untuk menemukan genre yang paling sering dibaca di Asia setelah 31 Desember 2023, beserta jumlahnya.
 
 **Download file csv yang diberikan menggunakan wget**
-'''
+```
 wget "https://drive.usercontent.google.com/u/0/uc?id=1l8fsj5LZLwXBlHaqhfJVjz_T0p7EJjqV&export=download" -O reading_data.csv
-'''
+```
 
 
 
