@@ -13,6 +13,9 @@ kemudian kita diminta untuk:
 3. Mencari siapa yang memberikan rating tertinggi untuk buku yang dibaca beserta nama dan judul bukunya.
 4. Menganalisis data untuk menemukan genre yang paling sering dibaca di Asia setelah 31 Desember 2023, beserta jumlahnya.
 
+**Download file csv yang diberikan menggunakan wget**
+
+
 
 
 
