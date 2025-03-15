@@ -17,8 +17,30 @@ kemudian kita diminta untuk:
 ```
 wget "https://drive.usercontent.google.com/u/0/uc?id=1l8fsj5LZLwXBlHaqhfJVjz_T0p7EJjqV&export=download" -O reading_data.csv
 ```
-
-
+**A. Menghitung jumlah buku yang dibaca oleh Chris Hemsworth**
+```
+awk '/Chris Hemsworth/ {++n}
+END{
+if(n>0){
+print "Chris Hemsworth membaca", n,"buku."
+}
+else{
+print "Chris Hemsworth tidak ditemukan."
+}
+}' reading_data.csv
+```
+**B. Menghitung rata-rata durasi membaca untuk buku-buku yang dibaca menggunakan Tablet**
+```
+awk -F, '$8 == "Tablet" { total += $6; count++ }
+END {
+if (count > 0) {
+print "Rata-rata durasi membaca dengan Tablet adalah", total / count, "menit";
+}
+else {
+print "Data membaca dengan tablet tidak ditemukan."
+}
+}' reading_data.csv
+```
 
 
 
