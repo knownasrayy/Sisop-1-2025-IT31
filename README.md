@@ -17,6 +17,7 @@ kemudian kita diminta untuk:
 ```
 wget "https://drive.usercontent.google.com/u/0/uc?id=1l8fsj5LZLwXBlHaqhfJVjz_T0p7EJjqV&export=download" -O reading_data.csv
 ```
+- -O untuk menentukan nama file
 **A. Menghitung jumlah buku yang dibaca oleh Chris Hemsworth**
 ```
 awk '/Chris Hemsworth/ {++n}
