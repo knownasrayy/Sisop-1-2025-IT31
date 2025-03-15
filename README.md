@@ -13,6 +13,12 @@ kemudian kita diminta untuk:
 3. Mencari siapa yang memberikan rating tertinggi untuk buku yang dibaca beserta nama dan judul bukunya.
 4. Menganalisis data untuk menemukan genre yang paling sering dibaca di Asia setelah 31 Desember 2023, beserta jumlahnya.
 
+### Membuat file bernama poppo_siroyo.sh
+```
+nano poppo_siroyo.sh
+```
+`nano` adalah teks editor berbasis terminal yang banyak digunakan di Linux
+
 ### Download file csv yang diberikan menggunakan wget
 ```
 wget "https://drive.usercontent.google.com/u/0/uc?id=1l8fsj5LZLwXBlHaqhfJVjz_T0p7EJjqV&export=download" -O reading_data.csv
