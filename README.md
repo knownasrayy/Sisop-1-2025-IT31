@@ -136,7 +136,7 @@ Untuk merayakan ulang tahun ke 52 album The Dark Side of the Moon, tim PR Pink F
 
 
 
-### C. Money
+### D. Money
 Menampilkan efek *matrix rain* berisi simbol mata uang.
 
 **Perintah:**
@@ -182,7 +182,7 @@ done
 
 
 
-### D. Brain Damage
+### E. Brain Damage
 Menampilkan *task manager* seperti `top` yang diperbarui setiap detik.
 
 **Perintah:**
