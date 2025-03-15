@@ -39,7 +39,7 @@ print "Chris Hemsworth tidak ditemukan."
 }' reading_data.csv
 ```
 Menggunakan `awk` untuk membaca file reading_data.csv
-- `'/Chris Hemsworth/ {++n}` setiap kali ada "Chris Hemsworth" maka n akan bertambah 1
+- `'/Chris Hemsworth/ {++n}` setiap kali ada "Chris Hemsworth" maka `n` akan bertambah 1
 
 ### B. Menghitung rata-rata durasi membaca untuk buku-buku yang dibaca menggunakan Tablet
 ```
