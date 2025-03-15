@@ -150,14 +150,26 @@ Untuk merayakan ulang tahun ke 52 album The Dark Side of the Moon, tim PR Pink F
 ```
 
 
+### C. Time
+Menampilkan jam secara real-time yang diperbarui setiap detik.
 
-
-
-
-
-
-
-
+**Perintah:**
+```bash
+./dsotm.sh --play="Time"
+```
+**Output (diperbarui setiap detik):**
+```
+2025-03-15 12:34:56
+2025-03-15 12:34:57
+2025-03-15 12:34:58
+```
+**Kode yang Digunakan:**
+```bash
+while true; do
+    echo -ne "\r$(date '+%Y-%m-%d %H:%M:%S')"
+    sleep 1
+done
+```
 
 ### D. Money
 Menampilkan efek *matrix rain* berisi simbol mata uang.
