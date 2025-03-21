@@ -235,7 +235,7 @@ sleep 1
 - `$(printf ' %.0s' $(seq 1 $((50 - progress / 2))))` berfungsi untuk mengisi sisa tempat dengan spasi
 - `sleep $(awk -v min=0.1 -v max=1 'BEGIN{srand(); print min+rand()*(max-min)}')` berfungsi untukk menghasilkan angka acak antara 0.1 hingga 1 detik
 
-### Output
+#### Output
 ```
 Ready, set, go! [#########                                         ] 20%
 Ready, set, go! [#####################                             ] 50%
@@ -243,6 +243,29 @@ Ready, set, go! [#########################################         ] 80%
 Ready, set, go! [##################################################] 100%
 Done!
 ```
+
+### B. On the Run (REVISI)
+```bash
+        "On the Run")
+            title_color=$((31 + RANDOM % 7))
+            echo -ne "\e[1;${title_color}m╔════════════════════════════════╗\e[0m\n"
+            echo -ne "\e[1;${title_color}m║          ON THE RUN           ║\e[0m\n"
+            echo -ne "\e[1;${title_color}m╚════════════════════════════════╝\e[0m\n"
+            echo -ne "\e[1;33mReady, set, go!\e[0m "
+            progress=0
+            while [ $progress -lt 100 ]; do
+                progress=$((progress + RANDOM % 10))
+                [ $progress -gt 100 ] && progress=100
+                color=$((31 + RANDOM % 7))
+                echo -ne "\r\e[1;${color}mReady, set, go! [$(printf '#%.0s' $(seq 1 $((progress / 2))))$(printf ' %.0s' $(seq 1 $((50 - progress / 2))))] $progress%\e[0m"
+                sleep $(awk -v min=0.1 -v max=0.5 'BEGIN{srand(); print min+rand()*(max-min)}')
+            done
+            echo -e "\n\e[1;32mDone!\e[0m"
+            ;;
+
+```
+Beberapa hal yang ditambahkan untuk menghias program ini adalah
+
 
 
 ### C. Time
