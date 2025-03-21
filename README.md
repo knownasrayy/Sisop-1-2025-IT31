@@ -330,6 +330,48 @@ while true; do
     sleep 1
 done
 ```
+### C. Time (REVISI)
+```bash
+        "Time")
+            title_color=$((31 + RANDOM % 7))
+            echo -ne "\e[1;${title_color}m╔════════════════════════╗\e[0m\n"
+            echo -ne "\e[1;${title_color}m║          TIME          ║\e[0m\n"
+            echo -ne "\e[1;${title_color}m╚════════════════════════╝\e[0m\n"
+            while true; do
+                color=$((31 + RANDOM % 7))
+                echo -ne "\r\e[1;${color}m$(date '+%Y-%m-%d %H:%M:%S')\e[0m"
+                sleep 1
+            done
+            ;;
+```
+
+Revisi yang diberikan adalah untuk menghias program ini, ubahan yang dilakukan adalah
+```bash
+title_color=$((31 + RANDOM % 7))
+echo -ne "\e[1;${title_color}m╔════════════════════════╗\e[0m\n"
+echo -ne "\e[1;${title_color}m║          TIME          ║\e[0m\n"
+echo -ne "\e[1;${title_color}m╚════════════════════════╝\e[0m\n"
+
+```
+- Berfungsi untuk menampilkan judul dengan warna acak.
+
+```bash
+color=$((31 + RANDOM % 7))
+echo -ne "\r\e[1;${color}m$(date '+%Y-%m-%d %H:%M:%S')\e[0m"
+
+```
+- Mengubah teks waktu setiap detik dengan warna acak.
+
+#### Input
+```
+./dsotm.sh --play="Time"
+```
+
+#### Output
+![image](https://github.com/user-attachments/assets/9ac33a70-ff49-4405-add5-46ea61fc071e)
+
+
+#### Output
 
 ### D. Money
 Menampilkan efek *matrix rain* berisi simbol mata uang.
