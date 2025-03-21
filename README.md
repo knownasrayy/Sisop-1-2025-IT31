@@ -164,6 +164,44 @@ You are capable of great things.
             ;;
 ```
 Ada beberapa kode yang ditambahkan dalam soal ini berupa update hiasan untuk outputnya
+```
+colors=(31 32 33 34 35 36 91 92 93 94 95 96)
+
+```
+- Array ini berisi kode warna ASCII untuk membuat warna di program lebih bervariasi
+
+```
+title_color=${colors[$RANDOM % ${#colors[@]}]}
+```
+- Berfungsi untuk memilih warna secara acak dari array `colors`
+
+```
+echo -ne "\e[1;${title_color}m╔════════════════════════════════════════╗\e[0m\n"
+echo -ne "\e[1;${title_color}m║        SPEAK TO ME AFFIRMATIONS       ║\e[0m\n"
+echo -ne "\e[1;${title_color}m╚════════════════════════════════════════╝\e[0m\n"
+```
+- Berfungsi untuk menampilkan judul dengan warna yang acak
+
+```
+color=${colors[$RANDOM % ${#colors[@]}]}
+echo -ne "\e[1;${color}m"
+```
+- Setiap line akan muncul dengan warna berbeda yang dipilih secara acak dari daftar warna.
+
+```
+for ((i=0; i<${#line}; i++)); do
+    echo -ne "${line:$i:1}"
+    sleep 0.05
+done
+```
+- Teks dari setiap line akan muncul satu per satu dengan efek ketikan.
+
+```
+echo -ne "\e[0m\n\n"
+sleep 1
+```
+- `\e[0m` berfungsi untuk mengembalikan warna ke default setelah mencetak teks.
+- `sleep 1` berfungsi untuk memberi jeda antar line.
 
 
 ### B. On The Run
