@@ -142,7 +142,7 @@ Believe in yourself.
 You are capable of great things.
 ```
 
-###$ A. Speak to Me (REVISI)
+#### A. Speak to Me (REVISI)
 ```bash
         "Speak to Me")
             colors=(31 32 33 34 35 36 91 92 93 94 95 96)
@@ -163,6 +163,8 @@ You are capable of great things.
             done
             ;;
 ```
+Ada beberapa kode yang ditambahkan dalam soal ini berupa update hiasan untuk outputnya
+
 
 ### B. On The Run
 ```bash
