@@ -135,14 +135,14 @@ Untuk merayakan ulang tahun ke 52 album The Dark Side of the Moon, tim PR Pink F
 - `grep -v '^\];$'` berfungsi untuk menampilkan semua baris kecuali yang ada `];`
 - `while IFS= read -r line` berfungsi untuk membaca setiap line
 
-### Output
+#### Output
 ```
 You are enough.
 Believe in yourself.
 You are capable of great things.
 ```
 
-#### A. Speak to Me (REVISI)
+### A. Speak to Me (REVISI)
 ```bash
         "Speak to Me")
             colors=(31 32 33 34 35 36 91 92 93 94 95 96)
@@ -208,7 +208,7 @@ sleep 1
 '/dsotm --play="Speak to Me"
 ```
 
-### Output
+#### Output
 ![image](https://github.com/user-attachments/assets/3d61338b-d0bb-435f-a00a-58c53c239a1c)
 
 
