@@ -109,11 +109,67 @@ Pada soal ini, kita diminta membuat sistem pencatatan Player aktif agar terpisah
 → Mendaftarkan Player baru menggunakan email, username, dan password, lalu menyimpannya di /data/player.csv.
 ![Screenshot 2025-03-15 235839](https://github.com/user-attachments/assets/4cc20517-3187-44df-b7b0-c234a9ff2493)
 
+## Soal_2 (revisi)
+Pada soal ini, kita diminta membuat sistem pencatatan Player aktif agar terpisah dari Observer. Proyek ini berisi skrip shell untuk pendaftaran dan login player dalam dunia Arcaea, serta validasi dan keamanan data.
 
+### A. "First Step in a New World"
+### register.sh
+#### Deskripsi
+Skrip ini digunakan untuk mendaftarkan player baru. Informasi player (email, username, password) disimpan dalam file player.csv
 
+#### Kode:
+#!/bin/bash
 
+if [ $# -ne 3 ]; then
+  echo "Penggunaan: $0 email username password"
+  exit 1
+fi
 
+email="$1"
+username="$2"
+password="$3"
 
+echo "$email,$username,$password" >> data/player.csv
+
+echo "Pendaftaran berhasil!"
+
+#### Output:
+- Jika pendaftaran berhasil:
+  Pendaftar berhasil!
+
+- Jika jumlah argumen salah:
+  Penggunaan: ./register.sh email username password
+
+### login.sh
+#### Deskripsi
+Skrip ini digunakan untuk login player. Skrip memeriksa apakah email dan password yang dimasukkan cocok dengan data di player.csv
+
+#### Kode:
+#!/bin/bash
+
+if [ $# -ne 2 ]; then
+  echo "Penggunaan: $0 email password"
+  exit 1
+fi
+
+email="$1"
+password="$2"
+
+if grep -q "^$email,.*,$password$" data/player.csv; then
+  echo "Login berhasil!"
+else
+  echo "Login gagal. Email atau password salah."
+fi
+
+#### Output:
+- Jika login berhasil:
+  Login berhasil!
+
+- Jika login gagal:
+  Login gagal. Email atau password salah.
+
+- Jika jumlah argumen salah:
+ Penggunaan: ./login.sh email password
 
 
 ## Soal_3
