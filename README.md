@@ -417,7 +417,7 @@ while true; do
 done
 ```
 
-### D. Money
+### D. Money (REVISI)
 ```bash
         "Money")
             symbols=( "$" "€" "£" "¥" "₫" "₹" "฿" "₣" )
@@ -468,6 +468,7 @@ printf "\e[1;${color}m%s\e[0m" "${symbols[RANDOM % ${#symbols[@]}]}"
 
 #### Output
 
+![image](https://github.com/user-attachments/assets/d2293010-d21f-4ecc-8d72-3962c6fe8829)
 
 
 
