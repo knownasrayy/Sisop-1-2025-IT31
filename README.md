@@ -203,6 +203,14 @@ sleep 1
 - `\e[0m` berfungsi untuk mengembalikan warna ke default setelah mencetak teks.
 - `sleep 1` berfungsi untuk memberi jeda antar line.
 
+#### Input
+```
+'/dsotm --play="Speak to Me"
+```
+
+### Output
+![image](https://github.com/user-attachments/assets/3d61338b-d0bb-435f-a00a-58c53c239a1c)
+
 
 ### B. On The Run
 ```bash
