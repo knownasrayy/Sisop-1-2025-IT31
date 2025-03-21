@@ -102,6 +102,13 @@ print "Data tidak ditemukan.";
 #### Output
 ![image](https://github.com/user-attachments/assets/7916301b-9bbe-44c2-977c-8e2ea2a818c9)
 
+```
+Chris Hemsworth membaca 56 buku.
+Rata-rata durasi membaca dengan Tablet adalah 152.381 menit
+Pembaca dengan rating tertinggi: Robert Downey Jr. - Deep Space Mysteries - 6.0
+Genre paling populer di Asia setelah 2023 adalah Mystery dengan 14 buku.
+
+```
 
 
 
