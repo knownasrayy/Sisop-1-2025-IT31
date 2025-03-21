@@ -373,38 +373,6 @@ if [[ "$2" == "--sort" ]]; then
     exit 0
 fi
 ```
-
-### 3. Contoh Penggunaan
-
-#### a) Melihat Summary dari Data
-Fitur ini digunakan untuk mengetahui Pokemon dengan **Usage%** dan **Raw Usage** tertinggi.
-
-**Perintah:**
-```bash
-./pokemon_analysis.sh pokemon_usage.csv --info
-```
-**Output:**
-```
-Summary of pokemon_usage.csv
-Highest Adjusted Usage:  Pikachu with 31.0927%
-Highest Raw Usage:       Charizard with 563831 uses
-```
-
-#### b) Mengurutkan Pokemon Berdasarkan Data Kolom
-Fitur ini digunakan untuk memahami meta turnamen dengan mengurutkan data berdasarkan kolom tertentu.
-
-**Perintah:**
-```bash
-./pokemon_analysis.sh pokemon_usage.csv --sort usage
-```
-**Output:**
-```
-Pokemon,Usage%,RawUsage,Type1,Type2,HP,Atk,Def,SpAtk,SpDef,Speed
-<namaPokemon>,31.09270%,253499,Ground,Flying,75,95,125,45,75,95
-<namaPokemon>,27.06328%,563831,Ground,Fighting,115,131,131,53,53,87
-...
-```
-
 #### b) Revisi Mengurutkan Pokémon Berdasarkan Penggunaan
 
 **Kesalahan code sebelumnya :**
