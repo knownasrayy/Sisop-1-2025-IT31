@@ -372,8 +372,6 @@ echo -ne "\r\e[1;${color}m$(date '+%Y-%m-%d %H:%M:%S')\e[0m"
 ![image](https://github.com/user-attachments/assets/9ac33a70-ff49-4405-add5-46ea61fc071e)
 
 
-#### Output
-
 ### D. Money
 Menampilkan efek *matrix rain* berisi simbol mata uang.
 
