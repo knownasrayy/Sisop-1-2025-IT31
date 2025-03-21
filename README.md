@@ -387,6 +387,7 @@ $ € ¥ £ ฿ ₣
 ```
 **Kode yang Digunakan:**
 ```bash
+"Money")
 symbols=( "$" "€" "£" "¥" "₫" "₹" "฿" "₣" )
 cols=$(tput cols)
 rows=$(tput lines)
