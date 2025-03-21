@@ -419,6 +419,7 @@ done
 
 ### D. Money (REVISI)
 ```bash
+"Brain Damage")
         "Money")
             symbols=( "$" "€" "£" "¥" "₫" "₹" "฿" "₣" )
             cols=$(tput cols)
@@ -496,6 +497,62 @@ while true; do
     sleep 1
 done
 ```
+
+### E. Brain Damage (REVISI)
+```bash
+
+        "Brain Damage")
+            while true; do
+                clear
+                title_color=$((31 + RANDOM % 7))
+                echo -e "\e[1;${title_color}m╔═════════════════════════════╗\e[0m"
+                echo -e "\e[1;${title_color}m║       BRAIN DAMAGE        ║\e[0m"
+                echo -e "\e[1;${title_color}m╚═════════════════════════════╝\e[0m"
+                color=$((31 + RANDOM % 7))
+                echo -e "\e[1;${color}mBrain Damage Task Manager - $(date '+%H:%M:%S')\e[0m"
+                echo -e "\e[1;34mPID   USER      %CPU %MEM   VSZ   RSS COMMAND\e[0m"
+                ps -eo pid,user,%cpu,%mem,vsz,rss,comm --sort=-%cpu | head -n 10 | while IFS= read -r line; do
+                    color=$((31 + RANDOM % 7))
+                    echo -e "\e[1;${color}m$line\e[0m"
+                done
+                sleep 1
+            done
+            ;;
+```
+Revisi yang ada di sini adalah untuk menghias output dari program ini, ubahannya adalah
+```bash
+title_color=$((31 + RANDOM % 7))
+echo -e "\e[1;${title_color}m╔═════════════════════════════╗\e[0m"
+echo -e "\e[1;${title_color}m║       BRAIN DAMAGE        ║\e[0m"
+echo -e "\e[1;${title_color}m╚═════════════════════════════╝\e[0m"
+
+```
+- Berfungsi untuk menampilkan judul dengan warna acak
+
+```bash
+color=$((31 + RANDOM % 7))
+echo -e "\e[1;${color}mBrain Damage Task Manager - $(date '+%H:%M:%S')\e[0m"
+
+```
+- Berfungsi untuk memberi warna acak untuk waktu.
+
+```bash
+ps -eo pid,user,%cpu,%mem,vsz,rss,comm --sort=-%cpu | head -n 10 | while IFS= read -r line; do
+    color=$((31 + RANDOM % 7))
+    echo -e "\e[1;${color}m$line\e[0m"
+done
+
+```
+- Berfungsi untuk memberi wana acak untuk setiap baris daftar proses.
+
+#### Input
+```
+./dsotm.sh --play"Brain Damage"
+```
+
+#### Output
+![image](https://github.com/user-attachments/assets/c3864620-93da-4a71-b7a1-cab9da27920f)
+
 
 
 
