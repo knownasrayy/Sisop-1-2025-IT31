@@ -417,6 +417,58 @@ while true; do
 done
 ```
 
+### D. Money
+```bash
+        "Money")
+            symbols=( "$" "€" "£" "¥" "₫" "₹" "฿" "₣" )
+            cols=$(tput cols)
+            rows=$(tput lines)
+            declare -a rain
+
+            for ((i=0; i<$cols; i++)); do
+                rain[$i]=$(( RANDOM % rows ))
+            done
+
+            while true; do
+                clear
+                for ((row=0; row<$rows; row++)); do
+                    for ((col=0; col<$cols; col++)); do
+                        if [[ ${rain[$col]} -eq $row ]]; then
+                            color=$((31 + RANDOM % 7))
+                            printf "\e[1;${color}m%s\e[0m" "${symbols[RANDOM % ${#symbols[@]}]}"
+                        else
+                            printf " "
+                        fi
+                    done
+                    echo ""
+                done
+                for ((i=0; i<$cols; i++)); do
+                    ((rain[$i]++))
+                    if (( rain[$i] > rows )); then
+                        rain[$i]=0
+                    fi
+                done
+                sleep 0.2
+            done
+            ;;
+```
+
+Perbedaan disini digunakan untuk menghias program yang akan dijalankan, perbedaanya adalah
+```bash
+color=$((31 + RANDOM % 7))
+printf "\e[1;${color}m%s\e[0m" "${symbols[RANDOM % ${#symbols[@]}]}"
+
+```
+- Berfungsi untuk memberi warna merah pada semua simbol dan memberi warna acak pada simbol untuk seterusnya
+
+#### Input
+```
+./dsotm.sh --play="Money"
+```
+
+#### Output
+
+
 
 
 ### E. Brain Damage
