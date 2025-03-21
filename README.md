@@ -205,7 +205,7 @@ sleep 1
 
 #### Input
 ```
-'/dsotm --play="Speak to Me"
+'/dsotm.sh --play="Speak to Me"
 ```
 
 #### Output
@@ -265,6 +265,48 @@ Done!
 
 ```
 Beberapa hal yang ditambahkan untuk menghias program ini adalah
+```bash
+title_color=$((31 + RANDOM % 7))
+echo -ne "\e[1;${title_color}m╔════════════════════════════════╗\e[0m\n"
+echo -ne "\e[1;${title_color}m║          ON THE RUN           ║\e[0m\n"
+echo -ne "\e[1;${title_color}m╚════════════════════════════════╝\e[0m\n"
+
+```
+- Berfungsi untuk menambahkan judul dengan warna acak.
+
+```bash
+echo -ne "\e[1;33mReady, set, go!\e[0m "
+
+```
+- `e[1;33mR` Berfungsi untuk mewarnai "Read, set, go!" dengan warna kuning pada teks awal.
+
+```bash
+color=$((31 + RANDOM % 7))
+echo -ne "\r\e[1;${color}mReady, set, go! ..."
+
+```
+- Berfungsi untuk mengupdate progress bar agar memiliki warna yang berbeda-beda
+
+```bash
+sleep $(awk -v min=0.1 -v max=0.5 'BEGIN{srand(); print min+rand()*(max-min)}')
+
+```
+- Berfungsi untuk mempercepat animasi dengan mengurangi delay maksimum dari 1 detik ke 0,5 detik.
+
+```bash
+echo -e "\n\e[1;32mDone!\e[0m"
+
+```
+- Berfungsi untuk mewarnai kata "Done!" berwana hijau untuk setiap kali program berakhir.
+
+#### Input
+```
+./dsotm.sh --play="On the Run"
+```
+
+#### Output
+![image](https://github.com/user-attachments/assets/3c5af751-cf11-41a8-86af-80c5ba9795e7)
+
 
 
 
