@@ -1,20 +1,32 @@
 #!/bin/bash
 
-DB_FILE="/data/player.csv"
-
-read -p "Enter Email: " EMAIL
-read -p "Enter Username: " USERNAME
-read -s -p "Enter Password: " PASSWORD
-echo  
-
-
-PASSWORD_HASH=$(echo -n "$PASSWORD" | sha256sum | awk '{print $1}')
-
-if [ ! -f "$DB_FILE" ]; then
-    mkdir -p "$(dirname "$DB_FILE")"
-    touch "$DB_FILE"
+if [ $# -ne 3 ]; then
+  echo "Penggunaan: $0 email username password"
+  exit 1
 fi
 
-echo "$EMAIL,$USERNAME,$PASSWORD_HASH" >> "$DB_FILE"
+email="$1"
+username="$2"
+password="$3"
+salt="ArcaeaSalt"
 
-echo "Registration successful!"
+if [[ ! $email =~ ^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$ ]]; then
+  echo "Format email tidak valid."
+  exit 1
+fi
+
+if [[ ! $password =~ ^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{8,}$ ]]; then
+  echo "Password harus minimal 8 karakter, mengandung huruf besar, huruf kecil, dan angka."
+  exit 1
+fi
+
+if grep -q "^$email," data/player.csv; then
+  echo "Email sudah terdaftar."
+  exit 1
+fi
+
+hashed_password=$(echo -n "$password$salt" | sha256sum | cut -d' ' -f1)
+
+echo "$email,$username,$hashed_password" >> data/player.csv
+
+echo "Pendaftaran berhasil!"
