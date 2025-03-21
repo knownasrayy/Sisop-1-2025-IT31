@@ -127,6 +127,7 @@ Pada soal ini, kita diminta membuat sistem pencatatan Player aktif agar terpisah
 Skrip ini digunakan untuk mendaftarkan player baru. Informasi player (email, username, password) disimpan dalam file player.csv
 
 #### Kode:
+```bash
 #!/bin/bash
 
 if [ $# -ne 3 ]; then
@@ -141,19 +142,21 @@ password="$3"
 echo "$email,$username,$password" >> data/player.csv
 
 echo "Pendaftaran berhasil!"
+```
 
 #### Output:
 - Jika pendaftaran berhasil:
-  Pendaftar berhasil!
+  `Pendaftar berhasil!`
 
 - Jika jumlah argumen salah:
-  Penggunaan: ./register.sh email username password
+  `Penggunaan: ./register.sh email username password`
 
 ### login.sh
 #### Deskripsi
 Skrip ini digunakan untuk login player. Skrip memeriksa apakah email dan password yang dimasukkan cocok dengan data di player.csv
 
 #### Kode:
+```bash
 #!/bin/bash
 
 if [ $# -ne 2 ]; then
@@ -169,16 +172,111 @@ if grep -q "^$email,.*,$password$" data/player.csv; then
 else
   echo "Login gagal. Email atau password salah."
 fi
-
+```
 #### Output:
 - Jika login berhasil:
-  Login berhasil!
+  `Login berhasil!`
 
 - Jika login gagal:
-  Login gagal. Email atau password salah.
+  `Login gagal. Email atau password salah.`
 
 - Jika jumlah argumen salah:
- Penggunaan: ./login.sh email password
+ `Penggunaan: ./login.sh email password`
+
+
+### B. "Radiant Genesis"
+
+Modifikasi `register.sh`
+
+#### Deskripsi
+Skrip `register.sh` dimodifikasi untuk menambahkan validasi format email dan password.
+
+#### Kode:
+```bash
+#!/bin/bash
+
+if [ $# -ne 3 ]; then
+  echo "Penggunaan: $0 email username password"
+  exit 1
+fi
+
+email="$1"
+username="$2"
+password="$3"
+
+# Validasi email
+if [[ ! $email =~ ^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$ ]]; then
+  echo "Format email tidak valid."
+  exit 1
+fi
+
+# Validasi password
+if [[ ! $password =~ ^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{8,}$ ]]; then
+  echo "Password harus minimal 8 karakter, mengandung huruf besar, huruf kecil, dan angka."
+  exit 1
+fi
+
+echo "$email,$username,$password" >> data/player.csv
+
+echo "Pendaftaran berhasil!"
+```
+#### Output:
+- Jika format email tidak valid:
+  `Format email tidak valid.`
+
+- Jika format password tidak valid:
+  `Password harus minimal 8 karakter, mengandung huruf besar, huruf kecil, dan angka.`
+
+
+### C. "Unceasing Spirit"
+
+Modifikasi `register.sh`
+
+#### Deskripsi
+Skrip `register.sh` dimodifikasi untuk mencegah pendaftaran dengan email yang sudah ada.
+
+#### Kode:
+```bash
+#!/bin/bash
+
+# ... (kode validasi email dan password)
+
+# Validasi email unik
+if grep -q "^$email," data/player.csv; then
+  echo "Email sudah terdaftar."
+  exit 1
+fi
+
+echo "$email,$username,$password" >> data/player.csv
+
+echo "Pendaftaran berhasil!"
+```
+
+#### Output:
+- Jika email sudah terdaftar:
+  `Email sudah terdaftar.`
+
+
+### D. "The Eternal Realm of Light"
+
+#### Deskripsi
+Skrip `register.sh` dimodifikasi untuk menyimpan password dalam bentuk hash SHA256 dengan static salt.
+
+#### Kode:
+```bash
+#!/bin/bash
+
+# ... (kode validasi email dan password)
+
+salt="ArcaeaSalt"
+hashed_password=$(echo -n "$password$salt" | sha256sum | cut -d' ' -f1)
+
+echo "$email,$username,$hashed_password" >> data/player.csv
+
+echo "Pendaftaran berhasil!"
+```
+#### Output
+Password yang disimpan di `player.csv` sekarang dalam bentuk hash SHA256.
 
 
 ## Soal_3
