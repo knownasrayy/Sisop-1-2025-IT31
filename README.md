@@ -487,6 +487,16 @@ Fitur ini memungkinkan pengguna mencari statistik penggunaan Pokemon tertentu de
 Pokemon,Usage%,RawUsage,Type1,Type2,HP,Atk,Def,SpAtk,SpDef,Speed
 Rotom-Wash,1.62637%,71243,Electric,Water,50,65,107,105,107,86
 ```
+**Kode yang Digunakan:**
+```bash
+# Soal 4(c) Mencari  nama Pokemon tertentu
+if [[ "$2" == "--grep" ]]; then
+    	echo "$(head -n 1 "$1")"
+    	awk -F',' -v name="$3" 'NR == 1 || tolower($1) ~ tolower(name)' "$1" | sort -t ',' -k2,2nr
+    	exit 0
+fi
+
+```
 
 #### d) Mencari Pokemon Berdasarkan Filter Nama Type
 Fitur ini digunakan untuk mencari Pokemon dengan tipe tertentu untuk menyusun "core" tim yang baik.
@@ -502,6 +512,25 @@ Ting-Lu,21.52833%,192107,Dark,Ground,155,110,125,55,80,45
 Kingambit,21.27718%,412146,Dark,Steel,100,135,120,60,85,50
 ...
 ```
+**Kode yang Digunakan:**
+```bash
+# Soal 4(d) Mencari Pokemon berdasarkan Type
+if [[ "$2" == "--filter" ]]; then
+    	# Cek apakah parameter type diberikan
+    	if [[ -z "$3" ]]; then
+    	echo "Error: no filter option provided"
+    	echo "Use -h or --help for more information."
+    	exit 1
+    	fi
+
+    	echo "$(head -n 1 "$1")"
+    	awk -F',' -v type="$3" 'NR == 1 || tolower($4) == tolower(type) || tolower($5) == tolower(type)' "$1" | sort -t ',' -k2,2nr
+    	exit 0
+fi
+
+
+```
+
 
 #### e) Error Handling
 Skrip ini dilengkapi dengan validasi kesalahan pengguna untuk memberikan kejelasan saat terjadi error.
@@ -515,6 +544,16 @@ Skrip ini dilengkapi dengan validasi kesalahan pengguna untuk memberikan kejelas
 Error: no filter option provided
 Use -h or --help for more information
 ```
+
+**Kode yang Digunakan:**
+```bash
+# Soal 4(e) Error Jika tidak ada perintah yang sesuai
+echo "Error: Invalid command '$2'!"
+echo "Use -h or --help for more information."
+exit 1
+
+```
+
 
 #### f) Menampilkan Halaman Bantuan
 Skrip ini menyediakan halaman bantuan yang jelas untuk memudahkan penggunaan.
@@ -536,4 +575,48 @@ Commands:
   -h, --help            : Menampilkan halaman bantuan ini.
 ============================================================
 ```
+**Kode yang Digunakan:**
+```bash
+# Soal 4(f) Help screen untuk petunjuk pengerjaan
+function show_help() {
+    	cat << "EOF"
 
+⠀⠀⠀⠀⠀⠀⣀⣠⣤⡔⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡴⣧
+⠀⠀⣀⣤⣶⣿⣿⣿⣿⣏⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢠⡾⠁⣼
+⢠⣾⣿⣿⣿⣿⣿⣿⣿⣿⢷⣆⣤⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣰⡟⠀⠀⣿
+⣾⣿⣿⣟⢛⣛⣛⣛⣋⠭⠥⠿⣿⣿⣷⣤⠀⠀⠀⢀⣀⣀⣠⣀⡀⢿⡇⠀⣸⡇
+⣿⣿⣿⠻⢧⠙⢯⡀⠈⠉⠙⠛⠳⢦⣝⢿⣷⢠⣾⣿⣿⣿⣿⣿⣯⣬⡥⢰⡟⠀
+⢹⣯⣛⠯⢿⣾⣷⣍⡳⣤⣀⠀⠀⠀⠉⠳⣍⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡃⠀⠀
+⠈⠹⣿⣿⣾⣿⣿⣿⣿⣷⣭⣛⠷⢦⣤⣤⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⠀⠀
+⠀⠀⠈⠛⠿⣿⣿⣿⣿⣿⢋⣵⡾⣣⣤⣦⢻⣿⣿⣿⣻⠻⣿⣿⣿⡏⠖⢻⠀⠀
+⠀⠀⠀⠀⠀⠀⠈⠉⠉⣱⣿⡟⠼⣻⣿⣿⢸⣿⣿⡇⡛⠀⣿⣿⣿⣧⡠⣸⡇⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⢠⣿⣿⣷⢹⣿⣿⣿⣏⢿⣿⣷⣕⣧⣿⣿⣿⢿⣿⡿⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠸⣿⣿⣿⣠⢿⣿⡟⣿⣷⣭⣻⠿⢿⠿⠷⢞⣫⣵⠿⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⢀⣿⣿⣿⡟⣎⢿⣧⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡟⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠸⣿⣿⣿⠁⠻⣷⡝⣩⣿⣿⣿⣿⣿⣿⣿⠿⠁⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⢻⣿⣿⠀⠀⠀⠀⣿⣿⣿⠉⠙⢻⢟⣿⡇⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢹⣿⣿⡀⠀⠸⣿⣿⡇⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⢿⢿⡧⠀⠀⠈⠉⠀⠀⠀⠀⠀⠀
+
+POKEMON ANALYSIS TOOL
+============================================================
+Usage: ./pokemon_analysis.sh <file.csv> <command> [options]
+
+Commands:
+  --info            	: Menampilkan statistik Pokémon dengan penggunaan tertinggi.
+  --sort <column>   	: Mengurutkan Pokémon berdasarkan kolom tertentu.  
+                    	Kolom yang tersedia: usage, rawusage, hp, atk, def, spatk, spdef, speed, nama.
+  --grep <name>     	: Mencari Pokémon berdasarkan nama (case insensitive).
+  --filter <type>   	: Menampilkan semua Pokémon berdasarkan Type1 atau Type2.
+  -h, --help        	: Menampilkan halaman bantuan ini.
+
+Contoh Penggunaan:
+  ./pokemon_analysis.sh pokemon_usage.csv --info
+  ./pokemon_analysis.sh pokemon_usage.csv --sort usage
+  ./pokemon_analysis.sh pokemon_usage.csv --grep pikachu
+  ./pokemon_analysis.sh pokemon_usage.csv --filter fire
+
+============================================================
+EOF
+    	exit 0
+}
