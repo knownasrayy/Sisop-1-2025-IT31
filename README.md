@@ -374,6 +374,79 @@ if [[ "$2" == "--sort" ]]; then
 fi
 ```
 
+
+## Soal_4
+
+# Pokemon Analysis Tool
+
+## Deskripsi
+Pada suatu hari, Anda diminta oleh teman Anda untuk membantunya mempersiapkan diri untuk turnamen Pokemon "Generation 9 OverUsed 6v6 Singles" dengan cara membuatkan tim yang cocok untuknya. Namun, Anda tidak memahami meta yang dimainkan di turnamen tersebut. Untungnya, seorang informan memberikan Anda data `pokemon_usage.csv` yang bisa diunduh dan dianalisis.
+
+Data tersebut memiliki banyak kolom:
+- **Nama Pokemon**
+- **Usage%**: Persentase Pokemon yang disesuaikan dengan Rank pengguna dan Winrate
+- **Raw Usage**: Jumlah mentah Pokemon dalam semua tim yang tercatat
+- **Type1 dan Type2**: Jenis Pokemon
+- **Statistik Pokemon**: HP, Atk, Def, Sp.Atk, Sp.Def, Speed
+
+Untuk menganalisis data tersebut dengan baik, Anda berpikiran untuk membuat skrip bernama `pokemon_analysis.sh` dengan fitur sebagai berikut:
+
+## Cara Menggunakan
+
+### 1. Download dan Jalankan Skrip
+Sebelum menjalankan skrip, pastikan file `pokemon_usage.csv` tersedia. Jika belum, skrip ini akan mengunduhnya secara otomatis dari URL yang telah ditentukan.
+
+Unduh skrip:
+```bash
+wget "https://raw.githubusercontent.com/username/repository/main/pokemon_analysis.sh" -O pokemon_analysis.sh
+chmod +x pokemon_analysis.sh
+```
+
+Jalankan skrip dengan perintah:
+```bash
+./pokemon_analysis.sh <file.csv> <command> [options]
+```
+
+### 2. Opsi Perintah
+| Perintah | Deskripsi |
+|----------|-------------|
+| `--info` | Menampilkan statistik Pokemon dengan penggunaan tertinggi. |
+| `--sort <column>` | Mengurutkan Pokemon berdasarkan kolom tertentu (usage, rawusage, hp, atk, def, spatk, spdef, speed, nama). |
+| `--grep <name>` | Mencari Pokemon berdasarkan nama (case insensitive). |
+| `--filter <type>` | Menampilkan semua Pokemon berdasarkan Type1 atau Type2. |
+| `-h, --help` | Menampilkan halaman bantuan. |
+
+### 3. Contoh Penggunaan
+
+#### a) Melihat Summary dari Data
+Fitur ini digunakan untuk mengetahui Pokemon dengan **Usage%** dan **Raw Usage** tertinggi.
+
+**Perintah:**
+```bash
+./pokemon_analysis.sh pokemon_usage.csv --info
+```
+**Output:**
+```
+Summary of pokemon_usage.csv
+Highest Adjusted Usage:  Pikachu with 31.0927%
+Highest Raw Usage:       Charizard with 563831 uses
+```
+
+#### b) Mengurutkan Pokemon Berdasarkan Data Kolom
+Fitur ini digunakan untuk memahami meta turnamen dengan mengurutkan data berdasarkan kolom tertentu.
+
+**Perintah:**
+```bash
+./pokemon_analysis.sh pokemon_usage.csv --sort usage
+```
+**Output:**
+```
+Pokemon,Usage%,RawUsage,Type1,Type2,HP,Atk,Def,SpAtk,SpDef,Speed
+<namaPokemon>,31.09270%,253499,Ground,Flying,75,95,125,45,75,95
+<namaPokemon>,27.06328%,563831,Ground,Fighting,115,131,131,53,53,87
+...
+```
+
 #### b) Revisi Mengurutkan Pokémon Berdasarkan Penggunaan
 
 **Kesalahan code sebelumnya :**
@@ -452,51 +525,50 @@ fi
 
 ```
 
+#### c) Mencari Nama Pokemon Tertentu
+Fitur ini memungkinkan pengguna mencari statistik penggunaan Pokemon tertentu dengan hasil yang diurutkan berdasarkan **Usage%**.
 
-#### c) Mencari Pokémon Berdasarkan Nama
 **Perintah:**
 ```bash
-./pokemon_analysis.sh pokemon_usage.csv --grep pikachu
+./pokemon_analysis.sh pokemon_usage.csv --grep rotom
 ```
 **Output:**
 ```
-Nama,Usage,RawUsage,Type1,Type2,HP,ATK,DEF,SPATK,SPDEF,Speed
-Pikachu,20.50,950,Electric,,35,55,40,50,50,90
-```
-**Kode yang Digunakan:**
-```bash
-if [[ "$2" == "--grep" ]]; then
-    echo "$(head -n 1 "$1")"
-    awk -F',' -v name="$3" 'NR == 1 || tolower($1) ~ tolower(name)' "$1" | sort -t ',' -k2,2nr
-    exit 0
-fi
+Pokemon,Usage%,RawUsage,Type1,Type2,HP,Atk,Def,SpAtk,SpDef,Speed
+Rotom-Wash,1.62637%,71243,Electric,Water,50,65,107,105,107,86
 ```
 
-#### d) Menampilkan Pokémon Berdasarkan Tipe
+#### d) Mencari Pokemon Berdasarkan Filter Nama Type
+Fitur ini digunakan untuk mencari Pokemon dengan tipe tertentu untuk menyusun "core" tim yang baik.
+
 **Perintah:**
 ```bash
-./pokemon_analysis.sh pokemon_usage.csv --filter fire
+./pokemon_analysis.sh pokemon_usage.csv --filter dark
 ```
 **Output:**
 ```
-Nama,Usage,RawUsage,Type1,Type2,HP,ATK,DEF,SPATK,SPDEF,Speed
-Charizard,25.67,1200,Fire,Flying,78,84,78,109,85,100
-Blaziken,18.90,800,Fire,Fighting,80,120,70,110,70,80
-```
-**Kode yang Digunakan:**
-```bash
-if [[ "$2" == "--filter" ]]; then
-    if [[ -z "$3" ]]; then
-        echo "Error: no filter option provided"
-        exit 1
-    fi
-    echo "$(head -n 1 "$1")"
-    awk -F',' -v type="$3" 'NR == 1 || tolower($4) == tolower(type) || tolower($5) == tolower(type)' "$1" | sort -t ',' -k2,2nr
-    exit 0
-fi
+Pokemon,Usage%,RawUsage,Type1,Type2,HP,Atk,Def,SpAtk,SpDef,Speed
+Ting-Lu,21.52833%,192107,Dark,Ground,155,110,125,55,80,45
+Kingambit,21.27718%,412146,Dark,Steel,100,135,120,60,85,50
+...
 ```
 
-#### e) Menampilkan Halaman Bantuan
+#### e) Error Handling
+Skrip ini dilengkapi dengan validasi kesalahan pengguna untuk memberikan kejelasan saat terjadi error.
+
+**Contoh Kesalahan:**
+```bash
+./pokemon_analysis.sh pokemon_usage.csv --filter
+```
+**Output:**
+```
+Error: no filter option provided
+Use -h or --help for more information
+```
+
+#### f) Menampilkan Halaman Bantuan
+Skrip ini menyediakan halaman bantuan yang jelas untuk memudahkan penggunaan.
+
 **Perintah:**
 ```bash
 ./pokemon_analysis.sh -h
@@ -507,10 +579,11 @@ POKEMON ANALYSIS TOOL
 ============================================================
 Usage: ./pokemon_analysis.sh <file.csv> <command> [options]
 Commands:
-  --info                : Menampilkan statistik Pokémon dengan penggunaan tertinggi.
-  --sort <column>       : Mengurutkan Pokémon berdasarkan kolom tertentu.
-  --grep <name>         : Mencari Pokémon berdasarkan nama.
-  --filter <type>       : Menampilkan semua Pokémon berdasarkan Type1 atau Type2.
+  --info                : Menampilkan statistik Pokemon dengan penggunaan tertinggi.
+  --sort <column>       : Mengurutkan Pokemon berdasarkan kolom tertentu.
+  --grep <name>         : Mencari Pokemon berdasarkan nama.
+  --filter <type>       : Menampilkan semua Pokemon berdasarkan Type1 atau Type2.
   -h, --help            : Menampilkan halaman bantuan ini.
 ============================================================
 ```
+
