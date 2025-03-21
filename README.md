@@ -305,7 +305,8 @@ echo -e "\n\e[1;32mDone!\e[0m"
 ```
 
 #### Output
-![image](https://github.com/user-attachments/assets/3c5af751-cf11-41a8-86af-80c5ba9795e7)
+![image](https://github.com/user-attachments/assets/1cdb72bd-c4b9-433b-89c1-2c1864d3a6c5)
+
 
 
 
