@@ -142,6 +142,28 @@ Believe in yourself.
 You are capable of great things.
 ```
 
+###$ A. Speak to Me (REVISI)
+```bash
+        "Speak to Me")
+            colors=(31 32 33 34 35 36 91 92 93 94 95 96)
+            title_color=${colors[$RANDOM % ${#colors[@]}]}
+            echo -ne "\e[1;${title_color}m╔════════════════════════════════════════╗\e[0m\n"
+            echo -ne "\e[1;${title_color}m║        SPEAK TO ME AFFIRMATIONS       ║\e[0m\n"
+            echo -ne "\e[1;${title_color}m╚════════════════════════════════════════╝\e[0m\n"
+            curl -s https://raw.githubusercontent.com/annthurium/affirmations/refs/heads/main/affirmations.js | 
+            sed '1d;$d' | sed -E 's/^[[:space:]]*"//;s/",?$//;' | grep -v '^\];$' | while IFS= read -r line; do
+                color=${colors[$RANDOM % ${#colors[@]}]}
+                echo -ne "\e[1;${color}m"
+                for ((i=0; i<${#line}; i++)); do
+                    echo -ne "${line:$i:1}"
+                    sleep 0.05
+                done
+                echo -ne "\e[0m\n\n"
+                sleep 1
+            done
+            ;;
+```
+
 ### B. On The Run
 ```bash
  "On the Run")
