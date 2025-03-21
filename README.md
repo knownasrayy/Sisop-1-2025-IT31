@@ -374,48 +374,6 @@ if [[ "$2" == "--sort" ]]; then
 fi
 ```
 
-
-## Soal_4
-
-# Pokemon Analysis Tool
-
-## Deskripsi
-Pada suatu hari, Anda diminta oleh teman Anda untuk membantunya mempersiapkan diri untuk turnamen Pokemon "Generation 9 OverUsed 6v6 Singles" dengan cara membuatkan tim yang cocok untuknya. Namun, Anda tidak memahami meta yang dimainkan di turnamen tersebut. Untungnya, seorang informan memberikan Anda data `pokemon_usage.csv` yang bisa diunduh dan dianalisis.
-
-Data tersebut memiliki banyak kolom:
-- **Nama Pokemon**
-- **Usage%**: Persentase Pokemon yang disesuaikan dengan Rank pengguna dan Winrate
-- **Raw Usage**: Jumlah mentah Pokemon dalam semua tim yang tercatat
-- **Type1 dan Type2**: Jenis Pokemon
-- **Statistik Pokemon**: HP, Atk, Def, Sp.Atk, Sp.Def, Speed
-
-Untuk menganalisis data tersebut dengan baik, Anda berpikiran untuk membuat skrip bernama `pokemon_analysis.sh` dengan fitur sebagai berikut:
-
-## Cara Menggunakan
-
-### 1. Download dan Jalankan Skrip
-Sebelum menjalankan skrip, pastikan file `pokemon_usage.csv` tersedia. Jika belum, skrip ini akan mengunduhnya secara otomatis dari URL yang telah ditentukan.
-
-Unduh skrip:
-```bash
-wget "https://raw.githubusercontent.com/username/repository/main/pokemon_analysis.sh" -O pokemon_analysis.sh
-chmod +x pokemon_analysis.sh
-```
-
-Jalankan skrip dengan perintah:
-```bash
-./pokemon_analysis.sh <file.csv> <command> [options]
-```
-
-### 2. Opsi Perintah
-| Perintah | Deskripsi |
-|----------|-------------|
-| `--info` | Menampilkan statistik Pokemon dengan penggunaan tertinggi. |
-| `--sort <column>` | Mengurutkan Pokemon berdasarkan kolom tertentu (usage, rawusage, hp, atk, def, spatk, spdef, speed, nama). |
-| `--grep <name>` | Mencari Pokemon berdasarkan nama (case insensitive). |
-| `--filter <type>` | Menampilkan semua Pokemon berdasarkan Type1 atau Type2. |
-| `-h, --help` | Menampilkan halaman bantuan. |
-
 ### 3. Contoh Penggunaan
 
 #### a) Melihat Summary dari Data
