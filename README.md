@@ -342,7 +342,7 @@ Jalankan skrip dengan perintah:
 
 ### 3. Contoh Penggunaan
 
-#### a) Menampilkan Informasi Pokémon dengan Penggunaan Tertinggi
+#### a) Menampilkan Informasi nama Pokemon dengan Usage% dan RawUsage paling tinggi
 **Perintah:**
 ```bash
 ./pokemon_analysis.sh pokemon_usage.csv --info
@@ -365,7 +365,18 @@ if [[ "$2" == "--info" ]]; then
 fi
 ```
 
-#### b) Mengurutkan Pokémon Berdasarkan Penggunaan
+#### b) Mengurutkan Pokémon Berdasarkan Penggunaan 
+
+Usage%
+RawUsage
+Nama
+HP
+Atk
+Def
+Sp.Atk
+Sp.Def
+Speed
+
 **Perintah:**
 ```bash
 ./pokemon_analysis.sh pokemon_usage.csv --sort usage
