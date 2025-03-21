@@ -374,6 +374,85 @@ if [[ "$2" == "--sort" ]]; then
 fi
 ```
 
+#### b) Revisi Mengurutkan Pokémon Berdasarkan Penggunaan
+
+**Kesalahan code sebelumnya :**
+Kolom "nama" belum diurutkan secara alfabetis (ascending).
+Kolom numerik belum diurutkan secara descending.
+
+```bash
+./pokemon_analysis.sh pokemon_usage.csv --sort nama
+```
+**Output:**
+```
+Pokemon,Usage%,RawUsage,Type1,Type2,HP,Atk,Def,SpAtk,SpDef,Speed
+Alomomola,8.02521%,144892,Water,None,165,75,80,40,45,65
+Amoonguss,1.32496%,26867,Grass,Poison,114,85,70,85,80,30
+Araquanid,2.27739%,133483,Water,Bug,68,70,92,50,132,42
+Arcanine,0.10297%,8056,Fire,None,90,110,80,100,80,95
+Arcanine-Hisui,0.10677%,26928,Fire,Rock,95,115,80,95,80,90
+Armarouge,0.70990%,14624,Fire,Psychic,85,60,100,125,80,75
+Azelf,0.03180%,6141,Psychic,None,75,125,70,125,70,115
+Azumarill,0.31674%,25317,Water,Fairy,100,50,80,60,80,50
+Barraskewda,1.41862%,29742,Water,None,61,123,60,60,50,136
+Basculegion,0.06161%,9203,Water,Ghost,120,112,65,80,75,78
+Basculegion-F,0.03964%,4789,Water,Ghost,120,92,65,100,75,78
+Bellibolt,0.08699%,6285,Electric,None,109,64,91,103,83,45
+Blaziken,1.99050%,61528,Fire,Fighting,80,120,70,110,70,80
+Blissey,14.57042%,83168,Normal,None,255,10,10,75,135,55
+
+```
+```bash
+./pokemon_analysis.sh pokemon_usage.csv --sort speed
+```
+**Output:**
+```
+Pokemon,Usage%,RawUsage,Type1,Type2,HP,Atk,Def,SpAtk,SpDef,Speed
+Deoxys-Speed,5.36610%,37835,Psychic,None,50,95,90,95,90,180
+Dragapult,15.57184%,324719,Dragon,Ghost,88,120,75,100,75,142
+Zamazenta,20.53205%,228136,Fighting,None,92,120,115,80,115,138
+Barraskewda,1.41862%,29742,Water,None,61,123,60,60,50,136
+Jolteon,0.65403%,13296,Electric,None,65,65,60,110,95,130
+Talonflame,0.64136%,21754,Fire,Flying,78,81,71,74,69,126
+
+```
+**Kode revisi yang Digunakan:**
+```bash
+# Soal 4(b) Mengurutkan Pokemon berdasarkan data kolom
+if [[ "$2" == "--sort" ]]; then
+	COLUMN=$3
+	case $COLUMN in
+    	"usage")   SORT_FIELD=2; SORT_TYPE="numeric" ;;
+    	"rawusage") SORT_FIELD=3; SORT_TYPE="numeric" ;;
+    	"hp")  	SORT_FIELD=6; SORT_TYPE="numeric" ;;
+    	"atk") 	SORT_FIELD=7; SORT_TYPE="numeric" ;;
+    	"def") 	SORT_FIELD=8; SORT_TYPE="numeric" ;;
+    	"spatk")   SORT_FIELD=9; SORT_TYPE="numeric" ;;
+    	"spdef")   SORT_FIELD=10; SORT_TYPE="numeric" ;;
+    	"speed")   SORT_FIELD=11; SORT_TYPE="numeric" ;;
+    	"nama")	SORT_FIELD=1; SORT_TYPE="alphabetical" ;;
+    	*)
+        	echo "Error: Invalid column '$COLUMN'!"
+        	exit 1
+        	;;
+	esac
+
+	# Print header (baris pertama tetap ada)
+	echo "$(head -n 1 "$1")"
+
+	# Sorting berdasarkan jenis data
+	if [[ "$SORT_TYPE" == "alphabetical" ]]; then
+    	tail -n +2 "$1" | sort -t ',' -k1,1
+	else
+    	tail -n +2 "$1" | sort -t ',' -k"$SORT_FIELD","$SORT_FIELD"nr
+	fi
+
+	exit 0
+fi
+
+```
+
+
 #### c) Mencari Pokémon Berdasarkan Nama
 **Perintah:**
 ```bash
