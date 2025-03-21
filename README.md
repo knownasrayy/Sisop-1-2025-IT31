@@ -487,7 +487,7 @@ fi
 ```
 
 #### c) Mencari Nama Pokemon Tertentu
-Fitur ini memungkinkan pengguna mencari statistik penggunaan Pokemon tertentu dengan hasil yang diurutkan berdasarkan **Usage%**.
+Di fitur ini berguna untuk search berdasarkan nama Pokemon tertentu yang diinginkan.
 
 **Perintah:**
 ```bash
@@ -510,7 +510,7 @@ fi
 ```
 
 #### d) Mencari Pokemon Berdasarkan Filter Nama Type
-Fitur ini digunakan untuk mencari Pokemon dengan tipe tertentu untuk menyusun "core" tim yang baik.
+Fitur ini digunakan membuat filter berdasarkan Type sebuah Pokemon.
 
 **Perintah:**
 ```bash
